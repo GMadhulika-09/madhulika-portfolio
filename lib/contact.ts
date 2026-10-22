@@ -10,6 +10,8 @@ export type ContactLinks = {
 };
 
 export async function getContactLinks(): Promise<ContactLinks | null> {
+  if (!supabase) return null;
+
   const { data, error } = await supabase
     .from("contact_links")
     .select("*")

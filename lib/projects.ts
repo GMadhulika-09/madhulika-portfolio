@@ -13,6 +13,8 @@ export type Project = {
 };
 
 export async function getProjects(): Promise<Project[]> {
+  if (!supabase) return [];
+
   const { data, error } = await supabase
     .from("projects")
     .select("*")
