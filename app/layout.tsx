@@ -18,7 +18,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Madhulika | Portfolio",
+  title: "G n v p Madhulika | Portfolio",
   description: "Portfolio of Gopu Naga Venkata Pavani Madhulika — CSE student, developer.",
 };
 

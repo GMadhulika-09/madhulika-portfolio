@@ -5,15 +5,23 @@ export default async function Projects() {
   const projects = await getProjects();
 
   return (
-    <section id="projects" className="relative w-full min-h-screen px-6 py-24 md:py-32 bg-transparent">
-      <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-center text-[#F8FAFC] mb-16">
-        Projects
-      </h2>
-      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-6">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
+    <section id="projects" className="content-section projects-section">
+      <div className="section-heading projects-heading">
+        <div>
+          <p className="eyebrow">A FEW THINGS I HAVE BUILT</p>
+          <h2>Selected <span>work</span></h2>
+        </div>
+        <p className="section-side-note">Ideas turned into<br />working projects</p>
       </div>
+      {projects.length > 0 ? (
+        <div className="projects-grid">
+          {projects.map((project) => (
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      ) : (
+        <p className="empty-projects">Projects will appear here soon.</p>
+      )}
     </section>
   );
 }

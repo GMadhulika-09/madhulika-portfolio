@@ -6,50 +6,49 @@ import { Project } from "@/lib/projects";
 
 export default function ProjectCard({ project }: { project: Project }) {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
+    <motion.article
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.5 }}
-      className="bg-[#111827]/40 backdrop-blur-md border border-[#1E293B] rounded-2xl overflow-hidden hover:border-[#10B981]/40 transition flex flex-col"
+      whileHover={{ y: -7 }}
+      viewport={{ once: true, amount: 0.18 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className="project-card"
     >
-      {project.image_url && (
-        <div className="relative w-full h-48">
+      <div className="project-visual">
+        {project.image_url ? (
           <Image
             src={project.image_url}
             alt={project.title}
             fill
             unoptimized
-            className="object-cover"
+            className="project-image"
           />
+        ) : (
+          <div className="project-image-placeholder">
+            <span>PROJECT / {project.sort_order.toString().padStart(2, "0")}</span>
+            <strong>{project.title}</strong>
+            <span className="visual-arrow">↗</span>
+          </div>
+        )}
+      </div>
+      <div className="project-info">
+        <div className="project-title-row">
+          <h3>{project.title}</h3>
+          <span className="project-arrow" aria-hidden="true">↗</span>
         </div>
-      )}
-
-      <div className="p-6 flex flex-col flex-1">
-        <h3 className="text-xl font-semibold text-[#F8FAFC] mb-2">{project.title}</h3>
-        <p className="text-[#94A3B8] text-sm leading-relaxed mb-4">
-          {project.description}
-        </p>
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map((tag) => (
-            <span key={tag} className="text-xs px-3 py-1 rounded-full bg-[#10B981]/10 text-[#10B981] border border-[#10B981]/20">
-              {tag}
-            </span>
-          ))}
+        <p>{project.description}</p>
+        <div className="project-tags">
+          {project.tags.map((tag) => <span key={tag}>{tag}</span>)}
         </div>
-        <div className="mt-auto flex gap-4">
+        <div className="project-links">
           {project.github_link && (
-            <a href={project.github_link} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#F8FAFC] underline underline-offset-4 hover:text-[#10B981] transition-colors">
-              GitHub
-            </a>
+            <a href={project.github_link} target="_blank" rel="noopener noreferrer">GitHub ↗</a>
           )}
           {project.demo_link && (
-            <a href={project.demo_link} target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-[#F8FAFC] underline underline-offset-4 hover:text-[#10B981] transition-colors">
-              Live Demo
-            </a>
+            <a href={project.demo_link} target="_blank" rel="noopener noreferrer">Live demo ↗</a>
           )}
         </div>
       </div>
-    </motion.div>
+    </motion.article>
   );
 }
